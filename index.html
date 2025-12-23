@@ -5,15 +5,12 @@
 <title>Raunak Mane | Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-:root {
+:root{
   --bg:#0a0a0a;
   --glass:rgba(255,255,255,0.08);
   --border:rgba(255,255,255,0.15);
@@ -21,115 +18,69 @@
   --text:#ffffff;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;}
 
-body{
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-/* Cursor Glow */
+/* Cursor */
 .cursor{
-  width:40px;
-  height:40px;
-  border-radius:50%;
+  width:40px;height:40px;border-radius:50%;
   background:radial-gradient(circle,var(--accent),transparent 70%);
-  position:fixed;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
+  position:fixed;pointer-events:none;transform:translate(-50%,-50%);
   z-index:9999;
 }
 
 /* Hero */
 .hero{
-  height:100vh;
-  display:grid;
-  place-items:center;
-  text-align:center;
+  height:100vh;display:grid;place-items:center;text-align:center;
 }
-
-.hero h1{
-  font-size:clamp(2.8rem,6vw,5rem);
-  font-weight:800;
-}
-
-.hero span{
-  color:var(--accent);
-}
-
-.hero p{
-  margin-top:1rem;
-  opacity:.7;
-}
-
-.choices{
-  margin-top:3rem;
-  display:flex;
-  gap:2rem;
-  justify-content:center;
-}
+.hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:800;}
+.hero span{color:var(--accent);}
+.hero p{margin-top:1rem;opacity:.7;}
+.choices{margin-top:3rem;display:flex;gap:2rem;justify-content:center;}
 
 /* Buttons */
 .btn{
-  padding:1rem 2.8rem;
-  font-size:1.1rem;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--glass);
-  color:white;
-  backdrop-filter:blur(20px);
-  cursor:pointer;
-  transition:.4s ease;
+  padding:1rem 2.8rem;font-size:1.1rem;border-radius:999px;
+  border:1px solid var(--border);background:var(--glass);color:white;
+  backdrop-filter:blur(20px);cursor:pointer;transition:.4s ease;
+}
+.btn:hover{transform:scale(1.12);background:var(--accent);}
+
+/* Fun Mode Overlay */
+.fun-overlay{
+  position:fixed;inset:0;background:#000;z-index:9000;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0;
+}
+.fun-overlay h1{
+  font-size:4rem;letter-spacing:.2em;
 }
 
-.btn:hover{
-  transform:scale(1.12);
-  background:var(--accent);
-}
-
-/* Fun Section */
+/* Section */
 .section{
-  min-height:100vh;
-  padding:8rem 10vw;
-  background:#050505;
+  min-height:100vh;padding:8rem 10vw;background:#050505;
 }
+.section h2{font-size:3rem;margin-bottom:4rem;}
 
-.section h2{
-  font-size:3rem;
-  margin-bottom:4rem;
-}
-
+/* Cards */
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:2.5rem;
 }
-
 .card{
-  padding:2.8rem;
-  border-radius:22px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  backdrop-filter:blur(18px);
-  transition:.4s ease;
+  padding:2.8rem;border-radius:22px;background:var(--glass);
+  border:1px solid var(--border);backdrop-filter:blur(18px);
+  transition:.2s ease;cursor:pointer;transform-style:preserve-3d;
 }
+.card span{display:block;margin-top:.8rem;font-size:.95rem;opacity:.7;}
+.card:hover{box-shadow:0 0 45px var(--accent);}
 
-.card span{
-  display:block;
-  margin-top:.8rem;
-  font-size:.95rem;
-  opacity:.7;
-}
-
-.card:hover{
-  transform:translateY(-18px) scale(1.06);
-  box-shadow:0 0 45px var(--accent);
+/* Sound Toggle */
+.sound-toggle{
+  position:fixed;bottom:30px;right:30px;
+  background:var(--glass);border:1px solid var(--border);
+  padding:.8rem 1.2rem;border-radius:999px;cursor:pointer;
+  backdrop-filter:blur(20px);z-index:9998;
 }
 </style>
 </head>
@@ -137,14 +88,12 @@ body{
 <body>
 
 <div class="cursor"></div>
+<div class="fun-overlay"><h1>FUN MODE</h1></div>
+<div class="sound-toggle">🎧 Sound: OFF</div>
 
-<!-- HERO -->
 <section class="hero">
   <div>
-    <h1>
-      Hi, I’m <span>Raunak</span><br>
-      I build <em>systems</em> & <em>internet chaos</em>
-    </h1>
+    <h1>Hi, I’m <span>Raunak</span><br>I build <em>systems</em> & <em>internet chaos</em></h1>
     <p>Industrial Engineer • Ops • Builder • UI Addict</p>
 
     <div class="choices">
@@ -154,70 +103,112 @@ body{
   </div>
 </section>
 
-<!-- FUN STUFF -->
 <section id="fun" class="section">
-  <h2>Fun Stuff 🎉</h2>
+<h2>Fun Stuff 🎉</h2>
 
-  <div class="cards">
-    <div class="card">
-      🔥 Ragebait
-      <span>Engineered to disturb the internet</span>
-    </div>
-
-    <div class="card">
-      💌 Will You Be My Date
-      <span>Interactive chaos with feelings</span>
-    </div>
-
-    <div class="card">
-      🥠 Fortune Cookie
-      <span>Random wisdom, max vibes</span>
-    </div>
-
-    <div class="card">
-      🧸 Pookie
-      <span>Unexplainable. Just vibes.</span>
-    </div>
+<div class="cards">
+  <div class="card" data-link="https://raunakmane79.github.io/RageBait/">
+    🔥 Ragebait
+    <span>Engineered to disturb the internet</span>
   </div>
+  <div class="card" data-link="https://raunakmane79.github.io/Date-/">
+    💌 Will You Be My Date
+    <span>Interactive chaos with feelings</span>
+  </div>
+  <div class="card" data-link="https://raunakmane79.github.io/Fortunecookie/">
+    🥠 Fortune Cookie
+    <span>Random wisdom, max vibes</span>
+  </div>
+  <div class="card" data-link="pookie">
+    🧸 Pookie
+    <span>Unexplainable. Just vibes.</span>
+  </div>
+</div>
 </section>
 
 <script>
-// Cursor Glow
+/* Cursor */
 const cursor=document.querySelector(".cursor");
 window.addEventListener("mousemove",e=>{
   cursor.style.left=e.clientX+"px";
   cursor.style.top=e.clientY+"px";
 });
 
-// GSAP Intro
+/* Intro */
 gsap.from(".hero h1",{y:120,opacity:0,duration:1.2,ease:"power4.out"});
-gsap.from(".hero p",{y:40,opacity:0,delay:.4,duration:.8});
+gsap.from(".hero p",{y:40,opacity:0,delay:.4});
 gsap.from(".btn",{scale:0,opacity:0,stagger:.2,delay:.9,ease:"back.out(1.7)"});
 
-// Redirect
+/* Redirect */
 document.querySelector(".boring").onclick=()=>{
   window.location.href="https://raunakmane79.github.io/cv/";
 };
 
-// Scroll to Fun
+/* Fun Mode */
+const overlay=document.querySelector(".fun-overlay");
 document.querySelector(".fun").onclick=()=>{
-  document.getElementById("fun").scrollIntoView({behavior:"smooth"});
+  gsap.to(overlay,{opacity:1,duration:.4,pointerEvents:"all"});
+  gsap.fromTo(overlay.querySelector("h1"),{scale:.5},{scale:1.2,duration:.6});
+  setTimeout(()=>{
+    gsap.to(overlay,{opacity:0,duration:.6,pointerEvents:"none"});
+    document.getElementById("fun").scrollIntoView({behavior:"smooth"});
+  },900);
 };
 
-// Reveal Cards
-gsap.from(".card",{
-  scrollTrigger:{
-    trigger:"#fun",
-    start:"top 70%"
-  },
-  y:80,
-  opacity:0,
-  stagger:.15,
-  duration:.8,
-  ease:"power3.out"
+/* Card Reveal */
+gsap.from(".card",{scrollTrigger:{trigger:"#fun",start:"top 70%"},y:80,opacity:0,stagger:.15});
+
+/* Card Clicks */
+document.querySelectorAll(".card").forEach(card=>{
+  card.onclick=()=>window.open(card.dataset.link,"_blank");
+});
+
+/* 3D Parallax */
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`rotateY(${x*20}deg) rotateX(${-y*20}deg) scale(1.05)`;
+  });
+  card.addEventListener("mouseleave",()=>card.style.transform="");
+});
+
+/* Sound Toggle */
+let soundOn=false;
+const toggle=document.querySelector(".sound-toggle");
+const clickSound=new Audio("https://assets.mixkit.co/sfx/preview/mixkit-click-1110.mp3");
+toggle.onclick=()=>{
+  soundOn=!soundOn;
+  toggle.textContent=soundOn?"🎧 Sound: ON":"🎧 Sound: OFF";
+};
+document.querySelectorAll("button,.card").forEach(el=>{
+  el.addEventListener("click",()=>{if(soundOn)clickSound.play();});
+});
+
+/* Easter Egg – Konami Code */
+let seq=[];
+const konami="ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba";
+window.addEventListener("keydown",e=>{
+  seq.push(e.key);
+  if(seq.join("").includes(konami)){
+    alert("👀 Easter Egg Found. You’re built different.");
+    seq=[];
+  }
+});
+
+/* Mobile Swipe */
+let startY=0;
+window.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
+window.addEventListener("touchend",e=>{
+  const endY=e.changedTouches[0].clientY;
+  if(startY-endY>80){
+    document.getElementById("fun").scrollIntoView({behavior:"smooth"});
+  }
 });
 </script>
 
 </body>
 </html>
+
 
