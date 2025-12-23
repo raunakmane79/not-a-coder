@@ -2,260 +2,262 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Raunak Mane | Digital Alchemist</title>
+<title>RAUNAK // ENTROPY</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
 :root {
-  --bg: #030303;
-  --accent: #ff3e3e;
-  --accent-rgb: 255, 62, 62;
-  --text: #ffffff;
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.1);
+  --primary: #fff;
+  --accent: #00ff66; /* Neon Matrix Green */
+  --bg: #000;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--primary);
+  font-family: 'Space Grotesk', sans-serif;
   overflow-x: hidden;
-  line-height: 1.6;
 }
 
-/* Background FX */
-.bg-vignette {
-  position: fixed; inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.8) 100%);
-  pointer-events: none; z-index: 2;
+/* Kinetic Background Text */
+.kinetic-bg {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  font-family: 'Syncopate'; font-size: 15vw; line-height: 0.8;
+  opacity: 0.05; pointer-events: none; z-index: 0;
+  word-break: break-all; white-space: normal;
+  user-select: none;
 }
 
-.noise {
-  position: fixed; inset: 0;
-  background: url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity: 0.04; pointer-events: none; z-index: 3;
+/* Custom Glitch Cursor */
+.custom-cursor {
+  position: fixed; width: 40px; height: 40px;
+  border: 1px solid var(--accent);
+  border-radius: 50%; pointer-events: none;
+  z-index: 10000; mix-blend-mode: difference;
+  transition: transform 0.1s;
 }
 
-.blob {
-  position: fixed; width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.15) 0%, transparent 70%);
-  border-radius: 50%; filter: blur(80px);
-  z-index: 1; pointer-events: none;
-}
-
-/* Typography */
-h1, h2 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -2px; }
-
-/* Custom Cursor */
-.cursor-follower {
-  position: fixed; width: 20px; height: 20px;
+.cursor-dot {
+  position: fixed; width: 4px; height: 4px;
   background: var(--accent); border-radius: 50%;
-  pointer-events: none; z-index: 10000; mix-blend-mode: difference;
-  transition: transform 0.1s ease;
+  pointer-events: none; z-index: 10001;
 }
 
 /* Hero Section */
 .hero {
-  height: 100vh; display: flex; align-items: center; justify-content: center;
-  position: relative; z-index: 10; text-align: center;
-  padding: 0 20px;
+  height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  position: relative; z-index: 10;
 }
 
-.hero-content h1 {
-  font-size: clamp(3rem, 10vw, 8rem);
-  line-height: 0.9; margin-bottom: 20px;
+.glitch-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
-.hero-content h1 span {
-  -webkit-text-stroke: 1px var(--text);
+.main-title {
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-family: 'Syncopate';
+  line-height: 0.8;
+  text-align: center;
+  position: relative;
+}
+
+.main-title span {
+  display: block;
+  -webkit-text-stroke: 2px var(--primary);
   color: transparent;
+  transition: 0.3s;
 }
 
-.hero-sub {
-  font-size: 1.2rem; opacity: 0.6; letter-spacing: 4px; font-weight: 300;
+.main-title span:hover {
+  color: var(--accent);
+  -webkit-text-stroke: 0px;
+  transform: skewX(-15deg);
 }
 
-.cta-group {
-  margin-top: 50px; display: flex; gap: 20px; justify-content: center;
+/* Brutalist Buttons */
+.nav-chaos {
+  margin-top: 50px;
+  display: flex; gap: 0;
 }
 
-.btn-magical {
-  padding: 20px 40px; border-radius: 0; border: 1px solid var(--border);
-  background: var(--glass); color: white; cursor: pointer;
-  text-transform: uppercase; font-weight: 700; font-family: 'Syncopate';
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative; overflow: hidden;
+.brutal-btn {
+  padding: 30px 60px;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: white;
+  font-family: 'Syncopate';
+  font-size: 1rem;
+  transition: 0.2s;
+  position: relative;
 }
 
-.btn-magical::before {
-  content: ''; position: absolute; top: 50%; left: 50%;
-  width: 0; height: 0; background: var(--accent);
-  transition: all 0.5s ease; border-radius: 50%; z-index: -1;
-  transform: translate(-50%, -50%);
+.brutal-btn:hover {
+  background: var(--primary);
+  color: black;
+  box-shadow: 10px 10px 0px var(--accent);
 }
 
-.btn-magical:hover::before { width: 300px; height: 300px; }
-.btn-magical:hover { border-color: var(--accent); color: black; }
-
-/* Projects Bento Grid */
-.section-label {
-  padding: 100px 10vw 20px; font-size: 0.8rem; color: var(--accent); letter-spacing: 5px;
-}
-
-.bento-grid {
+/* Grid Layout */
+.chaos-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 300px);
-  gap: 20px; padding: 0 10vw 100px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding: 5vw; gap: 20px;
+  position: relative; z-index: 10;
 }
 
-.bento-item {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  position: relative; overflow: hidden;
-  padding: 30px; display: flex; flex-direction: column;
-  justify-content: flex-end; cursor: pointer;
+.chaos-card {
+  height: 400px;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 40px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background: rgba(0,0,0,0.8);
 }
 
-.bento-item:nth-child(1) { grid-column: span 2; }
-.bento-item:nth-child(4) { grid-column: span 2; }
-
-.bento-item h3 { font-size: 1.5rem; margin-bottom: 10px; z-index: 2; }
-.bento-item p { font-size: 0.9rem; opacity: 0.5; z-index: 2; }
-
-.bento-item::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(45deg, var(--accent), transparent);
-  opacity: 0; transition: opacity 0.4s; z-index: 1;
+.chaos-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-20px) rotate3d(1, 1, 1, 5deg);
 }
 
-.bento-item:hover::after { opacity: 0.1; }
-.bento-item:hover h3 { color: var(--accent); }
+.chaos-card h3 {
+  font-family: 'Syncopate';
+  font-size: 2rem;
+  line-height: 1;
+}
 
-/* Fun Overlay */
-.flash-overlay {
-  position: fixed; inset: 0; background: white; z-index: 9999;
-  display: none; pointer-events: none;
+.chaos-card .meta {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--accent);
+}
+
+/* Inversion Flash */
+.flash-white {
+  position: fixed; inset: 0; background: white;
+  z-index: 99999; opacity: 0; pointer-events: none;
 }
 
 </style>
 </head>
 <body>
 
-<div class="cursor-follower"></div>
-<div class="bg-vignette"></div>
-<div class="noise"></div>
-<div class="blob" id="blob"></div>
-<div class="flash-overlay"></div>
+<div class="custom-cursor"></div>
+<div class="cursor-dot"></div>
+<div class="flash-white"></div>
+
+<div class="kinetic-bg" id="kinetic">
+  RAUNAK MANE CHAOS SYSTEM BUILDER DISRUPT INTERNET INDUSTRIAL OPS
+</div>
 
 <section class="hero">
-  <div class="hero-content">
-    <p class="hero-sub">INDUSTRIAL ENGINEER // BUILDER</p>
-    <h1>RAUNAK<br><span>MANE</span></h1>
-    <div class="cta-group">
-      <button class="btn-magical" onclick="window.location.href='https://raunakmane79.github.io/cv/'">Work</button>
-      <button class="btn-magical fun-trigger">Chaos</button>
-    </div>
+  <div class="glitch-wrapper">
+    <h1 class="main-title">
+      RAUNAK<br><span>MANE</span>
+    </h1>
+  </div>
+  
+  <div class="nav-chaos">
+    <button class="brutal-btn" onclick="triggerVoid()">ENTER THE VOID</button>
+    <button class="brutal-btn" onclick="window.location.href='https://raunakmane79.github.io/cv/'">THE BORING CV</button>
   </div>
 </section>
 
-<p class="section-label">SELECTED EXPERIMENTS</p>
-<div class="bento-grid" id="chaos-grid">
-  <div class="bento-item" data-link="https://raunakmane79.github.io/RageBait/">
-    <h3>RAGEBAIT</h3>
-    <p>Social Engineering at its worst.</p>
+<div class="chaos-grid">
+  <div class="chaos-card" onclick="window.open('https://raunakmane79.github.io/RageBait/', '_blank')">
+    <div class="meta">PROJECT_01</div>
+    <h3>RAGE BAIT</h3>
+    <p>DIGITAL MANIPULATION ENGINE.</p>
   </div>
-  <div class="bento-item" data-link="https://raunakmane79.github.io/date-/">
-    <h3>ROMANTIC CHAOS</h3>
-    <p>A digital "Will you be mine?"</p>
+  
+  <div class="chaos-card" onclick="window.open('https://raunakmane79.github.io/date-/', '_blank')">
+    <div class="meta">PROJECT_02</div>
+    <h3>DATE.EXE</h3>
+    <p>SOCIAL ENGINEERING FEELINGS.</p>
   </div>
-  <div class="bento-item" data-link="https://raunakmane79.github.io/Fortunecookie/">
+  
+  <div class="chaos-card" onclick="window.open('https://raunakmane79.github.io/Fortunecookie/', '_blank')">
+    <div class="meta">PROJECT_03</div>
     <h3>FORTUNE</h3>
-    <p>Vibe-checked wisdom.</p>
+    <p>ALGORITHMIC PROPHECIES.</p>
   </div>
-  <div class="bento-item" data-link="pookie">
+  
+  <div class="chaos-card" onclick="alert('STILL COMPILING...')">
+    <div class="meta">PROJECT_04</div>
     <h3>POOKIE</h3>
-    <p>Incubating pure vibes.</p>
+    <p>CLASSIFIED VIBES.</p>
   </div>
 </div>
 
 <script>
-// GSAP Core Animations
 gsap.registerPlugin(ScrollTrigger);
 
-// Mouse Blob Follower
-const blob = document.getElementById("blob");
-const follower = document.querySelector(".cursor-follower");
+// Custom Cursor Logic
+const cursor = document.querySelector(".custom-cursor");
+const dot = document.querySelector(".cursor-dot");
 
-window.addEventListener("mousemove", e => {
-  gsap.to(blob, { x: e.clientX - 250, y: e.clientY - 250, duration: 1.5, ease: "power2.out" });
-  gsap.to(follower, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 });
+window.addEventListener("mousemove", (e) => {
+  gsap.to(cursor, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.6, ease: "power3.out" });
+  gsap.to(dot, { x: e.clientX - 2, y: e.clientY - 2, duration: 0.1 });
 });
 
-// Hero Animation
-const tl = gsap.timeline();
-tl.from("h1", { y: 200, skewY: 10, opacity: 0, duration: 1.5, ease: "power4.out" })
-  .from(".hero-sub", { opacity: 0, y: 20, duration: 1 }, "-=1")
-  .from(".btn-magical", { scale: 0, stagger: 0.2, ease: "back.out(1.7)" }, "-=0.5");
-
-// Bento Grid Entrance
-gsap.from(".bento-item", {
+// Kinetic Text Scroll
+gsap.to("#kinetic", {
   scrollTrigger: {
-    trigger: ".bento-grid",
-    start: "top 80%",
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 2
   },
-  y: 100,
-  opacity: 0,
-  stagger: 0.1,
-  duration: 1,
-  ease: "power3.out"
+  xPercent: -20,
+  yPercent: 10
 });
 
-// The "Chaos" Trigger
-document.querySelector(".fun-trigger").addEventListener("click", () => {
-  const flash = document.querySelector(".flash-overlay");
-  flash.style.display = "block";
-  
-  gsap.to(flash, { opacity: 0, duration: 0.5, onComplete: () => flash.style.display = "none" });
-  
-  document.getElementById("chaos-grid").scrollIntoView({ behavior: "smooth" });
-  
-  // Glitch effect on items
-  gsap.to(".bento-item", {
-    x: () => Math.random() * 20 - 10,
-    y: () => Math.random() * 20 - 10,
-    repeat: 5,
-    yoyo: true,
-    duration: 0.05
-  });
+// Title Entrance
+gsap.from(".main-title", {
+  duration: 2,
+  y: 300,
+  skewY: 20,
+  stagger: 0.4,
+  ease: "power4.out"
 });
 
-// Card Interaction
-document.querySelectorAll(".bento-item").forEach(item => {
-  item.onclick = () => {
-    const link = item.getAttribute("data-link");
-    if(link === "pookie") {
-      alert("🧸 POOKIE IS STILL INCUBATING.");
-    } else {
-      window.open(link, "_blank");
-    }
-  };
+// "Enter the Void" Effect
+function triggerVoid() {
+  const tl = gsap.timeline();
+  
+  tl.to(".flash-white", { opacity: 1, duration: 0.05 })
+    .to(".flash-white", { opacity: 0, duration: 0.5 })
+    .to("body", { backgroundColor: "#00ff66", duration: 0.1 })
+    .to("body", { backgroundColor: "#000", duration: 0.1 })
+    .call(() => {
+      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    });
 
-  // Magnetic Hover
-  item.addEventListener("mousemove", (e) => {
-    const rect = item.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width/2) * 0.2;
-    const y = (e.clientY - rect.top - rect.height/2) * 0.2;
-    gsap.to(item, { x: x, y: y, duration: 0.3 });
+  // Shake everything
+  gsap.from("body", {
+    duration: 0.5,
+    x: 20,
+    y: 20,
+    ease: "rough({ template: none, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false})"
   });
+}
 
-  item.addEventListener("mouseleave", () => {
-    gsap.to(item, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+// Hover effects for cards
+document.querySelectorAll('.chaos-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    gsap.to(cursor, { scale: 2, borderColor: '#fff', duration: 0.3 });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(cursor, { scale: 1, borderColor: '#00ff66', duration: 0.3 });
   });
 });
 
